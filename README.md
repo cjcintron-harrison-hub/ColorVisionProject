@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 # Color Blindness Color Combination Finder
 
 ## Description
