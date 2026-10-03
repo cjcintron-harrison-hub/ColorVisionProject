@@ -51,5 +51,3 @@ Using the numpad please select a second color listed below.
 2
 
 Red and Blue is perfectly acceptable as a color combination for people with color blindness.
->>>>>>> Stashed changes
-```
