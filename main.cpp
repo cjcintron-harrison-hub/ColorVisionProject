@@ -4,19 +4,20 @@
 using namespace std;
 
 // Functions
-string identify_color(int r, int g, int b);
+string identify_color(int r , int g, int b);
 string identify_hex(int r, int g, int b);
 void CLEAR_SCREEN();
 void CONTINUE();
-void RGB565_EX();
 void RGB565_INFO();
-void MENU();
 void TITLE();
+void MENU();
 void DISPLAY_PALETTE(vector <string>&);
 void ADD_COLOR(vector <string>&);
 void EVALUATE(const vector<string>&);
+void RGB565_EX();
+void COLOR_LIBRARY();
 void LIBRARY();
-void MLIBRARY();
+void MENU_LIBRARY();
 void PROTANOPIA();
 void DEUTERANOPIA();
 void TRITANOPIA();
@@ -24,7 +25,7 @@ void TRITANOPIA();
 
 int main()
 {
-    int r, g, b;
+    int r = 0, g = 0, b = 0;
     string user_input;
     identify_color(r, g, b);
     identify_hex(r, g, b);
@@ -79,8 +80,8 @@ int main()
         else if(user_input == "3")
         {
             CLEAR_SCREEN();
-
             EVALUATE(user_palette);
+            CLEAR_SCREEN();
         }
         else if(user_input == "4")
         {
@@ -92,7 +93,14 @@ int main()
         else if(user_input == "5")
         {
             CLEAR_SCREEN();
+            COLOR_LIBRARY();
+            CONTINUE();
+            CLEAR_SCREEN();
+        }
+        else if(user_input == "6")
+        {
+            CLEAR_SCREEN();
             LIBRARY();
         }
-    }while(user_input != "6");
+    }while(user_input != "7");
 }

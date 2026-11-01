@@ -6,6 +6,12 @@
 #include <unordered_set>
 using namespace std;
 
+
+// Functions that reference each other
+void DISPLAY_PALETTE(vector <string>&);
+void ADD_COLOR(vector <string>&);
+
+
 // Structure to hold a reference color, its RGB565 component values, and hexcode
 struct ColorRef
 {
@@ -20,32 +26,32 @@ struct ColorRef
 const vector <ColorRef> PALETTE =
 {
     {"Black",            0,  0, 0, "#000000"},
-    {"White",           31, 63, 31, "#ffffff"},
-    {"Red",             31, 0, 0, "#ff0000"},
-    {"Green",            5, 45, 5, "#2bb82b"},
-    {"Blue",             0, 0, 31, "#0000ff"},
-    {"Bright Yellow",   31, 63, 0, "#ffff00"},
-    {"Cyan",             0, 63, 31, "#00ffff"},
-    {"Magenta",         31, 0, 31, "#ff00ff"},
-    {"Orange",          31, 35, 0, "#ff8e00"},
+    {"Dark Gray",        8, 16, 8, "#424142"},
     {"Gray",            16, 32, 16, "#848284"},
     {"Light Gray",      24, 48, 24, "#c5c2c5"},
-    {"Dark Gray",        8, 16, 8, "#424142"},
-    {"Purple",          16, 0, 20, "#8400a5"},
     {"Brown",           16, 16, 0, "#844100"},
-    {"Pink",            31, 32, 20, "#ff82a5"},
-    {"Light Blue",      15, 48, 30, "#7bc2f7"},
-    {"Muted Purple",    13, 22, 18, "#6b5994"},
-    {"Midnight Green",   4, 16, 5, "#214129"},
-    {"Sea Foam Green",  21, 52, 23, "#add7bd"},
-    {"Yellow",          25, 50, 5, "#ceca29"},
-    {"Dull Orange",     25, 25, 5, "#ce6529"},
-    {"Persian Green",    0, 44, 16, "#02b386"},
-    {"Dark Blue",        5, 10, 20, "#2928a5"},
-    {"Bright Green",     0, 63, 0, "#00ff00"},
+    {"Red",             31, 0, 0, "#ff0000"},
     {"Bright Orange",   31, 45, 0, "#ffb600"},
-    {"Bright Pink",     31, 45, 25, "#ffb8cc"}
-
+    {"Orange",          31, 35, 0, "#ff8e00"},
+    {"Dull Orange",     25, 25, 5, "#ce6529"},
+    {"Bright Yellow",   31, 63, 0, "#ffff00"},
+    {"Yellow",          25, 50, 5, "#ceca29"},
+    {"Bright Green",     0, 63, 0, "#00ff00"},
+    {"Green",            5, 45, 5, "#2bb82b"},
+    {"Sea Foam Green",  21, 52, 23, "#add7bd"},
+    {"Persian Green",    0, 44, 16, "#02b386"},
+    {"Midnight Green",   4, 16, 5, "#214129"},
+    {"Cyan",             0, 63, 31, "#00ffff"},
+    {"Light Blue",      15, 48, 30, "#7bc2f7"},
+    {"Blue",             0, 0, 31, "#0000ff"},
+    {"Dark Blue",        5, 10, 20, "#2928a5"},
+    {"Purple",          16, 0, 20, "#8400a5"},
+    {"Muted Purple",    13, 22, 18, "#6b5994"},
+    {"Magenta",         31, 0, 31, "#ff00ff"},
+    {"Pink",            31, 32, 20, "#ff82a5"},
+    {"Light Pink",     31, 45, 25, "#ffb8cc"},
+    {"White",           31, 63, 31, "#ffffff"}
+    
 };
 
 const unordered_map<string, unordered_set<string>> FORBIDDEN_COLORS = 
@@ -55,25 +61,25 @@ const unordered_map<string, unordered_set<string>> FORBIDDEN_COLORS =
     {"Blue", {"Muted Purple", "Dark Blue", "Green", "Light Blue", "Midnight Green", "Persian Green", "Magenta", "Purple"}},
     {"Bright Yellow", {"Bright Green", "Orange", "Bright Orange", "White", "Yellow"}},
     {"Cyan", {"Light Blue", "Bright Green"}},
-    {"Magenta", {"Orange", "Pink", "Dull Orange", "Bright Pink", "Bright Orange", "Blue", "Purple", "Dark Blue", "Light Blue"}},
-    {"Orange", {"Red", "Green", "Yellow", "Persian Green", "Bright Green", "Bright Orange", "Magenta", "Bright Pink"}},
+    {"Magenta", {"Orange", "Pink", "Dull Orange", "Light Pink", "Bright Orange", "Blue", "Purple", "Dark Blue", "Light Blue"}},
+    {"Orange", {"Red", "Green", "Yellow", "Persian Green", "Bright Green", "Bright Orange", "Magenta", "Light Pink"}},
     {"Gray", {"Persian Green", "Muted Purple", "Midnight Green", "Pink"}},
-    {"Light Gray", {"Pink", "Bright Pink", "Persian Green"}},
+    {"Light Gray", {"Pink", "Light Pink", "Persian Green"}},
     {"Dark Gray", {"Midnight Green", "Persian Green", "Dark Blue"}},
     {"Purple", {"Dark Blue", "Blue", "Magenta", "Muted Purple", "Brown"}},
     {"Brown", {"Red", "Green", "Midnight Green", "Yellow", "Dull Orange", "Purple"}},
-    {"Pink", {"Sea Foam Green", "Persian Green", "Light Gray", "White", "Bright Pink", "Gray", "Bright Orange", "Magenta", "Yellow", "Dull Orange"}},
+    {"Pink", {"Sea Foam Green", "Persian Green", "Light Gray", "White", "Light Pink", "Gray", "Bright Orange", "Magenta", "Yellow", "Dull Orange"}},
     {"Light Blue", {"Persian Green", "Green", "Sea Foam Green", "Bright Green", "Cyan", "Blue", "Magenta"}},
     {"Muted Purple", {"Purple", "Gray", "Dark Blue", "Blue", "Midnight Green"}},
     {"Midnight Green", {"Dark Gray", "Brown", "Gray", "Red", "Dark Blue", "Blue"}},
-    {"Sea Foam Green", {"Persian Green", "Bright Pink", "Pink"}},
-    {"Yellow", {"Orange", "Brown", "Dull Orange", "Green", "Red", "Bright Pink", "Pink"}},
-    {"Dull Orange", {"Yellow", "Magenta", "Red", "Bright Orange", "Bright Pink", "Pink", "Brown", "Purple", "Orange", "Green", "Persian Green"}},
+    {"Sea Foam Green", {"Persian Green", "Light Pink", "Pink"}},
+    {"Yellow", {"Orange", "Brown", "Dull Orange", "Green", "Red", "Light Pink", "Pink"}},
+    {"Dull Orange", {"Yellow", "Magenta", "Red", "Bright Orange", "Light Pink", "Pink", "Brown", "Purple", "Orange", "Green", "Persian Green"}},
     {"Persian Green", {"Dull Orange", "Sea Foam Green", "Pink", "Green", "Bright Orange", "Gray", "Light Gray", "Dark Gray", "Red", "Orange", "Bright Green", "Blue", "Light Blue"}},
     {"Dark Blue", {"Purple", "Muted Purple", "Midnight Green", "Blue", "Green", "Dark Gray"}},
     {"Bright Green", {"Bright Yellow", "Bright Orange", "Orange", "Green", "Red", "Persian Green", "Cyan", "Light Blue"}},
-    {"Bright Orange", {"Bright Green", "Persian Green", "Orange", "Green", "Dull Orange", "Pink", "Bright Pink", "Magenta", "Red"}},
-    {"Bright Pink", {"Bright Orange", "Dull Orange", "Yellow", "Pink", "Orange", "Magenta", "Bright Yellow", "Sea Foam Green", "Light Gray"}}
+    {"Bright Orange", {"Bright Green", "Persian Green", "Orange", "Green", "Dull Orange", "Pink", "Light Pink", "Magenta", "Red"}},
+    {"Light Pink", {"Bright Orange", "Dull Orange", "Yellow", "Pink", "Orange", "Magenta", "Bright Yellow", "Sea Foam Green", "Light Gray"}}
 };
 
 // Basic information about RGB565 for new users
@@ -83,7 +89,7 @@ void RGB565_INFO()
     cout << "||To keep it simple this RGB565 uses 32 shades of red, 64 shades of green, and 32 shades of blue instead of 255 for each shade.||\n";
     cout << "||The format is similar to the standard RGB format except the range is smaller so it takes up less memory and representing only around 65,000 colors.||\n";
     cout << "||The R values go from a range of 0 to 31, G values from 0 to 63, and B values from 0 to 31.||\n";
-    cout << "||The higher the value and the color will show up more. The lower the value and the color will show up less.||\n";
+    cout << "||All Black has a RGB of R:0, G:0, B:0 and all White has a RGB of R:31, G:63, B:31.||\n";
     cout << "||Now let's get to creating a palette that is color blind friendly!||\n";
 }
 
@@ -117,7 +123,7 @@ string identify_color(int r, int g, int b)
     return closest_name;
 }
 
-
+// Identifies the closest hexcolor to the RGB values given
 string identify_hex(int r, int g, int b)
 {
     string closest_hexcode = "Unknown";
@@ -145,6 +151,7 @@ string identify_hex(int r, int g, int b)
     return closest_hexcode;
 }
 
+// Let's the user control the pace
 void CONTINUE()
 {
     string user;
@@ -180,7 +187,7 @@ void TITLE()
 };
 
 //Library Card
-void MLIBRARY()
+void MENU_LIBRARY()
 {
     cout << R"(
     ==================================================================================
@@ -202,13 +209,15 @@ void MLIBRARY()
 //Menu
 void MENU()
 {
-    cout << "||USE THE NUMPAD TO NAVIGATE THE MENU.||\n";
+    cout << "||USE THE NUMPAD TO NAVIGATE THE MENU.||\n"
+            "||REFER TO THE COLOR LIBRARY IF YOU HAVE TROUBLR FINDING THE COLOR YOU WANT.||\n";
     cout << "||1. DIPLAY MY COLOR PALETTE||\n";
     cout << "||2. ADD A COLOR TO MY PALETTE||\n";
     cout << "||3. RATE MY PALETTE||\n";
-    cout << "||4. RANDOM COLOR GENERATOR||\n";
-    cout << "||5. COLORBLINDNESS LIBRARY||\n";
-    cout << "||6. QUIT||\n\n";
+    cout << "||4. RANDOM COLOR GENERATOR||\n"
+            "||5. COLOR LIBRARY||\n";
+    cout << "||6. COLORBLINDNESS LIBRARY||\n";
+    cout << "||7. QUIT||\n\n";
 }
 
 //1. Display's the user's current color palette
@@ -229,12 +238,17 @@ void DISPLAY_PALETTE(vector<string>& user_palette)
         }
         cout << "\n";
 
-        cout << "||Would you like to remove a color from your palette? Y/N||\n";
+        cout << "||Would you like to remove a color from your palette? Type the letter Y to remove a color.||\n"
+                "||If you would like to return to the menu type any letter.||\n";
         cin >> exit;
-        if((exit == "Y" || exit == "y"))
+        if((exit == "Y" || exit == "y") && (user_palette.size() > 0))
         {
             do
             {
+                if((user_palette.size() == 0))
+                {
+                    break;
+                }
                 CLEAR_SCREEN();
                 cout << "||Okay. Enter the number of the color you would like to delete.||\n";
                 int i = 1;
@@ -246,7 +260,7 @@ void DISPLAY_PALETTE(vector<string>& user_palette)
                 cin >> user;
                 index = user - 1;
 
-                if(index < user_palette.size())
+                if((index < user_palette.size()) && (index > -1))
                 {
                     user_palette.erase(user_palette.begin() + index);
                     cout << "||That color has been successfully removed. Would you like to remove another? Y/N||\n";
@@ -257,9 +271,20 @@ void DISPLAY_PALETTE(vector<string>& user_palette)
                 }
 
                 cin >> exit;
+                if((exit == "Y" || exit == "y") && (user_palette.size() == 0))
+                {
+                    cout << "||Your color palette is already empty. There are no more colors to delete. You can return to the menu by typeing the letter N.||\n"
+                            "||If you would like to go directly to the ADD COLORS page type the letter Y.||\n";
+                    cin >> exit;
+                    if((exit == "Y" || exit == "y"))
+                    {
+                        CLEAR_SCREEN();
+                        ADD_COLOR(user_palette);
+                        break;
+                    }
+                }
             }while(exit != "N" && exit != "n");
         }
-        CONTINUE();
     }
 
     else
@@ -357,9 +382,9 @@ void ADD_COLOR(vector<string>& user_palette)
             }
         }
 
-        cout <<"||Would you like to return to the menu or add another color? Type Y to return to the menu or type N to add another color.||\n";
+        cout <<"||Would you like to return to the menu or add another color? Type the letter N to return to the menu or type the letter Y to add another color.||\n";
         cin >> user;
-    }while(user != "Y" && user != "y");
+    }while(user != "N" && user != "n");
 }
 
 //3. Color Palette Evaluation
@@ -403,7 +428,6 @@ void EVALUATE(const vector<string>& user_palette)
     else
     {
         cout << "||Your palette is currently empty or it doesnt have enough colors to be properly evaluated. Add some colors to it!||\n";
-        CONTINUE();
     }
     CONTINUE();
 }
@@ -433,11 +457,32 @@ void RGB565_EX()
     cout << "||The hexcode for the color is: " << identify_hex(r, g, b) << "||\n";
 }
 
-//5. Colorblindness Library
+//5. Color Library
+void COLOR_2(const vector<ColorRef>&);
+
+void COLOR_LIBRARY()
+{
+    COLOR_2(PALETTE);
+}
+void COLOR_2(const vector<ColorRef>& PALETTE)
+{
+    cout << "||THIS IS THE LIST OF COLORS IN THE CURRENT LIBRARY||\n";
+    cout << "{Color,   R,   G,   B,   HEXCODE}\n\n";
+    for(const auto& color : PALETTE)
+    {
+        cout << "{" << color.name << ",  " << color.r << ", " << color.g << ", " << color.b << ",  " << color.hexcode << "}" << endl;
+        
+    }
+}
+
+
+//6. Colorblindness Library
 void PROTANOPIA()
 {
     cout << "[1. WHAT IS IT?]\n";
-    cout << "Protanopia is when the L-cones are completely absent. Like Deuteranopia, the person sees through only two cone types (M and S). Red-Green discrimination is lost, but with an important additional effect: Reds appear very dark, almost Black. This is because the L-cones are normally the primary detector of Red light — without them, Red wavelengths produce almost no signal.\n";
+    cout << "Protanopia is when the L-cones are completely absent. Like Deuteranopia, the person sees through only two cone types (M and S).\n"
+            "Red-Green color discrimination is lost, but with an important additional effect: Reds can appear very dark, almost Black in extreme cases.\n"
+            "This is because the L-cones are normally the primary detector of Red light — without them, Red wavelengths produce almost no signal.\n";
 
     cout << "\n[2. HOW RARE IS IT?]\n";
     cout << "Protonopia is the second most common form of color blindness sitting just behind Deuteranopia. Protanopia affects about 1.0% of males and 0.01% of females. Protanopia is most often inherited.\n";
@@ -455,7 +500,7 @@ void PROTANOPIA()
 
     cout << "Cooking meat to the correct doneness can be difficult because the color change from raw to cooked is hard to see.\n";
 
-    cout << "[4. HOW IS IT DIAGNOSED?]\n";
+    cout << "\n[4. HOW IS IT DIAGNOSED?]\n";
     cout << "The Ishihara color plate test is the most widely used screening tool and is effective at detecting Deuteranopia.\n";
     cout << "However the Ishihara test cannot distinguish between Deutan and Protan deficiencies on its own so additional testing would be required.\n\n";
     CONTINUE();
@@ -464,10 +509,12 @@ void PROTANOPIA()
 void DEUTERANOPIA()
 {
     cout << "[1. WHAT IS IT?]\n";
-    cout << "Deutranopia is when the M-cones are completely absent. The person has only two working cone types (L and S), so they see the world through a two-dimensional color space instead of three. The entire red-orange-yellow-green range collapses into varying shades of brownish-yellow. Blues and purples appear similar to each other.\n";
+    cout << "Deutranopia is when the M-cones are completely absent. The person has only two working cone types (L and S), so they see the world through a two-dimensional color space instead of three.\n"
+            "The entire red-orange-yellow-green range collapses into varying shades of brownish-yellow. Blues and purples appear similar to each other.\n";
 
     cout << "\n[2. HOW RARE IS IT?]\n";
-    cout << "Deutranopia is the most common out of all the types of color blindness affecting 1.2% of men and only about 0.01% of women. Deuteranopia is most commonly inherited rather then developed later in life.\n";
+    cout << "Deutranopia is the most common out of all the types of color blindness affecting 1.2% of men and only about 0.01% of women.\n"
+            "Deuteranopia is most commonly inherited rather then developed later in life.\n";
 
     cout << "\n[3. HOW DOES IT AFFECT A PERSONS DAILY LIFE?]\n";
     cout << "Here are a few examples!\n\n";
@@ -491,10 +538,12 @@ void DEUTERANOPIA()
 void TRITANOPIA()
 {
     cout << "[1. WHAT IS IT?]\n";
-    cout << "Tritanopia is when the S-cones are completely absent. The person sees through only L and M cones, losing discrimination along the blue-yellow axis. Blues and greens become confused, yellows may appear pinkish or light gray, and the sky may look greenish. Purple is often indistinguishable from a dark reddish-brown.\n";
+    cout << "Tritanopia is when the S-cones are completely absent. The person sees through only L and M cones, losing discrimination along the blue-yellow axis.\n"
+            "Blues and greens become confused, yellows may appear pinkish or light gray, and the sky may look greenish. Purple is often indistinguishable from a dark reddish-brown.\n";
 
     cout << "\n[2. HOW RARE IS IT?]\n";
-    cout << "Tritanopia approximatly affects approximately 1 in 30,000-50,000 people making it one of the most rare forms of colorb lindness outside of complete color blindness. Unlike Protanopia and Deuteranopia, Tritanopia is most oftnely aquired rather than inherited.\n";
+    cout << "Tritanopia approximatly affects approximately 1 in 30,000-50,000 people making it one of the most rare forms of colorb lindness outside of complete color blindness.\n"
+            "Unlike Protanopia and Deuteranopia, Tritanopia is most oftnely aquired rather than inherited.\n";
 
     cout << "\n[3. HOW DOES IT AFFECT A PERSONS DAILY LIFE?]\n";
     cout << "Here are a few examples!\n\n";
@@ -510,7 +559,8 @@ void TRITANOPIA()
     cout << "Appreciating sunsets, blue skies, and other natural color phenomena may be diminished because the blue and yellow components are reduced.\n";
 
     cout << "\n[4. HOW IS IT DIAGNOSED?]\n";
-    cout << "Tritanopia is more often acquired (from disease, medication, or aging) than inherited. Conditions that can cause acquired tritanopia include diabetic retinopathy, glaucoma, age-related macular degeneration, and exposure to certain industrial solvents.\n";
+    cout << "Tritanopia is more often acquired (from disease, medication, or aging) than inherited.\n"
+            "Conditions that can cause acquired tritanopia include diabetic retinopathy, glaucoma, age-related macular degeneration, and exposure to certain industrial solvents.\n";
     cout << "Standard Ishihara color plates are designed to detect Red-Green deficiency and typically miss Tritanopia meaning specialized tests are required in order for a proper diagnosis.\n\n";
     CONTINUE();
 }
@@ -520,12 +570,12 @@ void LIBRARY()
     string user;
     do
     {
-        MLIBRARY();
+        MENU_LIBRARY();
         cout << "||THIS IS A SMALL LIBRARY ON THE THREE MAJOR TYPES OF COLORBLINDESS.||\n";
         cout << "||PLEASE USE THE NUMPAD TO NAVIGATE THE MENU||\n";
         cout << "||1. PROTANOPIA||\n";
-        cout << "||2. TRITANOPIA||\n";
-        cout << "||3. DEUTERANOPIA||\n";
+        cout << "||2. DEUTERANOPIA||\n";
+        cout << "||3. TRITANOPIA||\n";
         cout << "||4. QUIT||\n";
         cin >> user;
 
@@ -538,13 +588,13 @@ void LIBRARY()
         else if(user == "2")
         {
             CLEAR_SCREEN();
-            TRITANOPIA();
+            DEUTERANOPIA();
         }
 
         else if(user == "3")
         {
             CLEAR_SCREEN();
-            DEUTERANOPIA();
+            TRITANOPIA();
         }
         CLEAR_SCREEN();
     }while(user != "4");
