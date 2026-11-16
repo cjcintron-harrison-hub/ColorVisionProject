@@ -636,6 +636,7 @@ void SAVE(vector<string>& user_palette)
 {
   string file_name;
   string user;
+  int i = 1;
   ofstream saveFS;
 
   if (user_palette.empty())
@@ -649,7 +650,7 @@ void SAVE(vector<string>& user_palette)
   do
   {
     CLEAR_SCREEN();
-
+    cout << "||CURRENT PALETTE||\n\n";
     for(auto& color : user_palette)
     {
         cout << i << ".) " << color << endl;
