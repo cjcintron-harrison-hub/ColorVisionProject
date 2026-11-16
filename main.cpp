@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include<fstream>
 using namespace std;
 
 // Functions
@@ -21,12 +22,16 @@ void MENU_LIBRARY();
 void PROTANOPIA();
 void DEUTERANOPIA();
 void TRITANOPIA();
+void SAVE(vector <string>&);
+void LOAD(vector <string>&);
 
 
 int main()
 {
     int r = 0, g = 0, b = 0;
     string user_input;
+    ofstream out_FS;
+    ifstream in_FS;
     identify_color(r, g, b);
     identify_hex(r, g, b);
     vector <string> user_palette;
@@ -94,7 +99,6 @@ int main()
         {
             CLEAR_SCREEN();
             COLOR_LIBRARY();
-            CONTINUE();
             CLEAR_SCREEN();
         }
         else if(user_input == "6")
@@ -102,5 +106,16 @@ int main()
             CLEAR_SCREEN();
             LIBRARY();
         }
-    }while(user_input != "7");
+        else if(user_input == "7")
+        {
+            CLEAR_SCREEN();
+            SAVE(user_palette);
+            CLEAR_SCREEN();
+        }
+        else if(user_input == "8")
+        {
+            LOAD(user_palette);
+            CLEAR_SCREEN();
+        }
+    }while(user_input != "9");
 }
