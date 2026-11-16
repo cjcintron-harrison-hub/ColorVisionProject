@@ -409,7 +409,10 @@ void EVALUATE(const vector<string>& user_palette)
     for (size_t i = 0; i < user_palette.size(); ++i)
     {
       auto it = FORBIDDEN_COLORS.find(user_palette[i]);
-      if (it == FORBIDDEN_COLORS.end()) continue;
+      if (it == FORBIDDEN_COLORS.end())
+      {
+        cout << "||Error. One of your colors is not in the database. Please go to display pallet to remove it. If that does not work restart the program.||\n";
+      }
 
       const auto& forbidden_set = it->second;
       for (size_t j = i + 1; j < user_palette.size(); ++j)
@@ -679,8 +682,8 @@ void SAVE(vector<string>& user_palette)
 
       saveFS.close();
       cout << "||Palette saved to " << file_name << ".||\n";
-      cout << "||To return to the menu type N. To save to another file type Y.||\n";
-      cin >> user;
+      CONTINUE();
+      break;
     }
   } while (user != "N" && user != "n");
 }
@@ -695,10 +698,7 @@ void LOAD(vector<string>& user_palette)
   do
   {
     CLEAR_SCREEN();
-    cout << "||When loading a file ensure that all your colors are capitalized or formated like the example.||\n";
-    cout << "{EX: Blue, Red, Green, Light Blue}\n"
-            "or\n"
-            "{Blue\n Red\n Green\n Light Blue}\n";
+    cout << "||When loading a file ensure that all your colors are capitalized or formated like in the example in the README.md.||\n";
     cout << "||What is the name of the file you are trying to load?||\n";
     cin >> file_name;
     loadFS.open(file_name);
@@ -735,8 +735,8 @@ void LOAD(vector<string>& user_palette)
         }
       }
       loadFS.close();
-      cout << "||To return to the menu type N. To try again type Y.||\n";
-      cin >> user;
+      CONTINUE();
+      break;
     }
   }while(user != "N" && user != "n");
 }

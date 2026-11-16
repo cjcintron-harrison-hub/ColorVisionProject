@@ -10,15 +10,23 @@ My program has been updated to use RGB565 values to help users create or load a 
 
 Cameryn Cintron-Harrison
 
-## Example
+## Example - How to Run
 
 To run the program, give the following commands:
 
 ```
-g++ --std=c++11 *.cpp -o cvp
-./cvp
+g++ myfile.cpp myfile2.cpp -o myfile
 ```
+## Example Input
+Make sure if you are loading in a file to have it stored in the same folder as the one running the program.
+You can provide a file in the following format. Make sure spelling is correct and that the first letter is capitalized for all words like in the example:
 
+Blue
+Red
+Green
+Light Blue
+
+## Example Output:
 Here is an example of the program running:
 
 ```
@@ -106,13 +114,6 @@ color
 
 ___________________________________________________________________________________________________________________
 
-||When loading a file ensure that all your colors are capitalized or formated like the example.||
-{EX: Blue, Red, Green, Light Blue}
-or
-{Blue
- Red
- Green
- Light Blue}
 ||What is the name of the file you are trying to load?||
 color
 ||Color Dark Gray was successfully loaded.||
