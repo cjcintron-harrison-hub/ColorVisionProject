@@ -30,8 +30,6 @@ int main()
 {
     int r = 0, g = 0, b = 0;
     string user_input;
-    ofstream out_FS;
-    ifstream in_FS;
     identify_color(r, g, b);
     identify_hex(r, g, b);
     vector <string> user_palette;
